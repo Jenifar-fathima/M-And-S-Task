@@ -32,7 +32,12 @@ namespace BookGuestRoom.Test
             string strMessage = BookGuestRoom.GuestRoom.RoomSeperation(3, 8);
             Assert.AreEqual("room 1:Adult 1 - Children 3\nroom 2:Adult 1 - Children 3\nroom 3:Adult 1 - Children 2\n", strMessage);
         }
-
+        [TestMethod]
+        public void TestBookRooms_2A_8C()
+        {
+            string strMessage = BookGuestRoom.GuestRoom.RoomSeperation(2, 8);
+            Assert.AreEqual("room 1:Adult 1 - Children 3\nroom 2:Adult 1 - Children 3\nNo adults available. 2 children have no rooms.", strMessage);
+        }
         [TestMethod]
         public void TestBookRooms_1A_0C()
         {
@@ -64,7 +69,13 @@ namespace BookGuestRoom.Test
         public void TestBookRooms_10A_7C()
         {
             string strMessage = BookGuestRoom.GuestRoom.RoomSeperation(10, 7);
-            Assert.AreEqual("No entry! Maximum 16 people are allowed\nroom 1:Adult 1 - Children 3\nroom 2:Adult 1 - Children 3\nroom 3:Adult 3 - Children 1\nroom 4:Adult 4 - Children 0\n", strMessage);
+            Assert.AreEqual("room 1:Adult 1 - Children 3\nroom 2:Adult 1 - Children 3\nroom 3:Adult 3 - Children 1\nroom 4:Adult 4 - Children 0\nNo entry! Maximum 16 people are allowed", strMessage);
+        }
+        [TestMethod]
+        public void TestBookRooms_0A_1C()
+        {
+            string strMessage = BookGuestRoom.GuestRoom.RoomSeperation(0, 1);
+            Assert.AreEqual("No adults available. 1 children have no rooms.", strMessage);
         }
         #endregion
     }

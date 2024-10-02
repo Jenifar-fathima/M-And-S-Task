@@ -8,7 +8,8 @@
             int nTotalPeople = nAdult + nChildren;
             int nRoomCount = 0;
             string strResult = string.Empty;
-            strResult = InputValidator(nAdult, nChildren);
+            strResult = ValidInputChecker(nAdult, nChildren);
+
             while (nRoomCount < 4 &&  nAdult != 0)
             {
                 nRoomCount += 1;
@@ -38,21 +39,42 @@
                     nTotalPersonInRoom = adultCount + childrenCount;
                 }
                 strResult += $"room {nRoomCount}:Adult {adultCount} - Children {childrenCount}\n";
+                strResult += RoomBookingRules(nAdult, nChildren);
+
                 nTotalPeople = nAdult + nChildren;
             }
             return strResult;
         }
-        public static string InputValidator(int adult, int children)
+
+        public static string RoomBookingRules(int adult, int children)
         {
             string strResult = "";
-            if (adult == 0 && children == 0)
+
+            if (adult == 0 && children > 0)
             {
-                strResult += "Oops! There are no people entered...";
+                strResult += $"No adults available. {children} children have no rooms.";
             }
 
-            else if (adult + children > 16)
+            if (adult + children > 16)
             {
-                strResult += "No entry! Maximum 16 people are allowed\n";
+                strResult += "No entry! Maximum 16 people are allowed";
+            }
+            return strResult;
+        }
+
+        public static string ValidInputChecker(int adult,int children)
+        {
+            string strResult = string.Empty;
+            if (adult == 0)
+            {
+                if (children == 0)
+                {
+                    strResult += "Oops! There are no people entered...";
+                }
+                else if (children > 0)
+                {
+                    strResult += $"No adults available. {children} children have no rooms.";
+                }
             }
             return strResult;
         }
